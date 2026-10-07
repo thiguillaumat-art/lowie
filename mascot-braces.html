@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lowie — les accolades</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600&family=Silkscreen&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#121212;--muted:#6B6B6B;--lav:#C4B5FD;--line:#EEEEEE;--term:#161616}
+*{box-sizing:border-box;margin:0}
+body{background:#fff;color:var(--ink);font-family:Inter,sans-serif;padding:40px;display:flex;flex-direction:column;gap:36px}
+h1{font-family:Silkscreen;font-weight:400;font-size:28px}
+h2{font-family:'IBM Plex Mono';font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+p{font-size:14px;line-height:21px;max-width:760px}
+.row{display:flex;gap:16px;flex-wrap:wrap;align-items:stretch}
+.cell{border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;width:150px}
+.cell .lab{font-family:'IBM Plex Mono';font-size:12px;text-align:center}
+.cell .sub{font-size:12px;color:var(--muted);text-align:center;line-height:17px}
+.hero{display:flex;gap:40px;align-items:center}
+.hero .big{background:#FAFAFA;border-radius:10px;padding:28px}
+.dark{background:var(--term);border-radius:10px;padding:28px}
+.lock{display:flex;align-items:center;gap:10px;font-family:Silkscreen;font-size:30px}
+.lock.inline{gap:0}
+.lock.inline svg{margin:0 1px}
+svg{shape-rendering:crispEdges}
+.caption{font-family:'IBM Plex Mono';font-size:12px;color:var(--muted)}
+</style></head><body>
+<h1>Lowie · { •• }</h1>
+<p><b>Ce qui le rend unique : son visage est le contenu des accolades.</b> Comme un objet en code, ce qu'il y a entre { } change selon ce qu'il fait. Chaque état du produit a son expression, faite de signes de clavier. Et son geste signature : <b>les accolades se referment sur ce qu'il a trouvé</b>, comme on entoure quelque chose d'important.</p>
+
+<section>
+  <h2>1 · L'animation : le produit en 6 secondes</h2>
+  <div class="hero">
+    <div class="big"><svg id="story" width="240" height="192" viewBox="0 0 20 16"></svg></div>
+    <div class="dark"><svg id="story-dark" width="120" height="96" viewBox="0 0 20 16"></svg></div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div class="caption" id="state">idle</div>
+      <p style="max-width:420px">Il attend · cligne · lit tes commits (les yeux balayent) · trouve un fil (!!) · se referme sur un inscrit (+1) · content (^^). C'est exactement la boucle de Lowie.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>2 · Le système d'expressions</h2>
+  <div class="row" id="states"></div>
+</section>
+
+<section>
+  <h2>3 · Avec le nom</h2>
+  <div class="row" style="gap:48px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:8px"><div class="lock"><svg class="mk" width="45" height="36" viewBox="0 0 20 16"></svg>Lowie</div><span class="caption">A · signe + nom</span></div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div class="lock inline">L<svg class="mk" width="45" height="36" viewBox="0 0 20 16"></svg>WIE</div><span class="caption">B · le signe remplace le « o »</span></div>
+    <div style="display:flex;flex-direction:column;gap:8px;align-items:center"><svg class="mk" width="20" height="16" viewBox="0 0 20 16"></svg><span class="caption">favicon 16 px</span></div>
+  </div>
+</section>
+
+<script>
+const INK = "#121212";
+const r = (x,y,w,h,c=INK)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
+// braces on a 20x16 grid; dx = how far they close in (the "hug")
+const LB = [[4,1,2,1],[3,2,2,4],[2,6,2,1],[1,7,2,2],[2,9,2,1],[3,10,2,4],[4,14,2,1]];
+function braces(dx=0, c=INK){
+  return LB.map(([x,y,w,h])=>r(x+dx,y,w,h,c)).join("") + LB.map(([x,y,w,h])=>r(20-x-w-dx,y,w,h,c)).join("");
+}
+const F = {
+  idle:  c=>r(7,6,2,3,c)+r(11,6,2,3,c),
+  blink: c=>r(7,8,2,1,c)+r(11,8,2,1,c),
+  readL: c=>r(6,8,2,1,c)+r(10,8,2,1,c),
+  readR: c=>r(8,8,2,1,c)+r(12,8,2,1,c),
+  found: c=>r(7,5,2,3,c)+r(7,9,2,1,c)+r(11,5,2,3,c)+r(11,9,2,1,c),
+  plus1: c=>r(6,7,3,1,c)+r(7,6,1,3,c)+r(12,5,1,5,c)+r(11,6,1,1,c),
+  happy: c=>r(7,6,2,1,c)+r(6,7,1,1,c)+r(9,7,1,1,c)+r(11,6,2,1,c)+r(10,7,1,1,c)+r(13,7,1,1,c),
+  think: c=>r(6,8,2,1,c)+r(9,8,2,1,c)+r(12,8,2,1,c),
+};
+const draw = (svg, face, dx=0, c=INK) => svg.innerHTML = braces(dx, c) + F[face](c);
+
+// story loop
+const STORY = [["idle",0,900],["blink",0,140],["idle",0,500],["readL",0,350],["readR",0,350],["readL",0,350],["readR",0,350],["found",0,700],["plus1",0,250],["plus1",1,900],["happy",1,700],["happy",0,500]];
+const LAB = {idle:"idle",blink:"idle",readL:"lit tes commits",readR:"lit tes commits",found:"a trouvé un fil",plus1:"+1 inscrit",happy:"content"};
+const s1 = document.getElementById("story"), s2 = document.getElementById("story-dark"), st = document.getElementById("state");
+let i = 0;
+(function tick(){ const [f,dx,ms] = STORY[i]; draw(s1,f,dx); draw(s2,f,dx,"#C4B5FD"); st.textContent = LAB[f]; i=(i+1)%STORY.length; setTimeout(tick, matchMedia("(prefers-reduced-motion: reduce)").matches ? 2000 : ms); })();
+
+// states grid
+const S = [["idle","{ •• }","attend"],["blink","{ .. }","cligne"],["readR","{ ·· }","lit tes commits"],["found","{ !! }","a trouvé un fil"],["plus1","{ +1 }","un inscrit — il se referme"],["happy","{ ^^ }","ça a marché"],["think","{ … }","rédige un post"]];
+const grid = document.getElementById("states");
+S.forEach(([f,txt,sub])=>{
+  const d = document.createElement("div"); d.className="cell";
+  d.innerHTML = `<svg width="100" height="80" viewBox="0 0 20 16"></svg><div class="lab">${txt}</div><div class="sub">${sub}</div>`;
+  draw(d.querySelector("svg"), f, f==="plus1"?1:0); grid.append(d);
+});
+document.querySelectorAll(".mk").forEach(s=>draw(s,"idle"));
+</script>
+</body></html>
