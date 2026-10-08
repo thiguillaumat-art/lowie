@@ -21,6 +21,8 @@ Free skill by Lowie {••} — https://getlowie.vercel.app
 ## Hard rules
 
 - **Never invent a number, a user count, a revenue figure or a result.** Only use numbers that appear in the commits, the diff, or the user's own sentence. If there is no number, write without one.
+- **Never describe what users did, felt or said** (drop-off, complaints, feedback, "people kept asking") unless the user told you so in this conversation. If the post needs it, ask, or leave it out. Do not write it and add a disclaimer afterwards.
+- A number from an old commit may have been changed by a later commit. Date it ("in September…") or check that it is still true in the current code.
 - **Never post anything yourself.** Draft only; the user publishes.
 - No "excited to announce", no emojis as bullet points, no "game-changer", no "🚀".
 - Reddit: no product link in the body unless the subreddit's rules allow it; the user must check the rules first. Say so in one line.
