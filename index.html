@@ -58,6 +58,15 @@
   button { height: 48px; padding: 0 22px; border: 0; border-radius: 4px; background: var(--ink); color: #fff; font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: opacity 150ms; }
   button:hover { opacity: .85; }
   button[disabled] { opacity: .6; cursor: default; }
+  .live { display: flex; flex-direction: column; align-items: center; gap: 10px; padding-top: 20px; max-width: 520px; }
+  .live-bar { display: flex; gap: 3px; }
+  .live-bar i { width: 12px; height: 12px; border: 1px solid #212121; }
+  .live-bar i.on { background: var(--ink); }
+  .live-text { font-family: var(--mono); font-size: 14px; }
+  .live-text strong { font-family: var(--pixel); font-weight: 400; font-size: 18px; }
+  .live-rule { font-size: 14px; line-height: 21px; color: var(--muted); text-wrap: balance; }
+  .live-rule a { color: var(--ink); }
+  @media (max-width: 640px) { .live-bar i { width: 8px; height: 8px; } .live-bar { gap: 2px; } }
   .micro { font-family: var(--mono); font-size: 13px; color: var(--muted); }
   .status { font-family: var(--mono); font-size: 14px; }
   .status:empty { display: none; }
@@ -219,6 +228,11 @@
   </div>
   <p class="status" id="status" role="status" aria-live="polite"></p>
   <p class="micro">Free during the beta. We email you once, when your spot opens.</p>
+  <div class="live" aria-live="polite">
+    <div class="live-bar" id="live-bar" aria-hidden="true"></div>
+    <p class="live-text"><strong id="live-n">–</strong> / 30 builders · day <span id="live-day">–</span> of 14</p>
+    <p class="live-rule">The rule: if Lowie doesn't reach 30 signups by Oct 22, I shut it down. Built in public, numbers every Friday on <a href="https://x.com/getlowie" target="_blank" rel="noopener">@getlowie</a>.</p>
+  </div>
 </section>
 
 <section class="problem" aria-labelledby="problem-title">
@@ -378,6 +392,19 @@
     setTimeout(() => label.textContent = "Copy link", 1800);
   });
 
+  // live counter: the public kill switch
+  (function () {
+    const bar = document.getElementById("live-bar");
+    for (let k = 0; k < 30; k++) bar.appendChild(document.createElement("i"));
+    const day = Math.min(14, Math.max(1, Math.floor((Date.now() - Date.UTC(2026, 9, 7, 22)) / 864e5) + 1));
+    document.getElementById("live-day").textContent = day;
+    window.refreshCount = () => rpc("waitlist_count", {}).then(n => {
+      document.getElementById("live-n").textContent = n;
+      [...bar.children].forEach((el, k) => el.classList.toggle("on", k < n));
+    }).catch(() => {});
+    refreshCount();
+  })();
+
   // returning visitor: show their place in line
   const saved = store.get("lowie_code");
   if (saved) rpc("waitlist_status", { p_code: saved }).then(st => { if (st) { showCard(st); document.getElementById("f2").style.display = "none"; } }).catch(() => {});
@@ -400,6 +427,7 @@
       joined = email;
       celebrate();
       showCard(st);
+      refreshCount();
     } catch (err) {
       status.className = "status err";
       status.textContent = err.message === "invalid" ? "That email doesn't look right." : err.message === "limit" ? "Too many signups from this connection. Try again in an hour." : "Something went wrong. Try again in a minute.";
