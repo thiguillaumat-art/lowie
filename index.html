@@ -75,6 +75,10 @@
   .c-code #c-code { font-family: var(--mono); font-size: 22px; font-weight: 600; letter-spacing: .3em; }
   .c-copy-label { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   .card .c-hint { font-size: 14px; line-height: 21px; color: var(--muted); max-width: 380px; }
+  .c-meter { display: flex; gap: 6px; }
+  .c-meter i { width: 36px; height: 8px; border: 1px solid #212121; border-radius: 2px; }
+  .c-meter i.on { background: var(--ink); }
+  .card .c-meter-label { font-family: var(--mono); font-size: 13px; color: var(--ink); }
   .c-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
   .c-btns a { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); text-decoration: none; padding: 8px 12px; border: 1px solid #8A8A8A; border-radius: 4px; }
   .c-btns a:hover { border-color: var(--ink); }
@@ -191,9 +195,11 @@
         <p class="c-pos">#<span id="c-pos">–</span></p>
         <p class="c-sub"><span id="c-total">–</span> waiting · <span id="c-refs">0</span> invited by you</p>
         <div class="c-invite">
-          <p class="c-title">Invite friends, move up</p>
+          <p class="c-title">Invite 3 friends, get into the first wave</p>
+          <div class="c-meter" aria-hidden="true"><i id="m1"></i><i id="m2"></i><i id="m3"></i></div>
+          <p class="c-meter-label" id="c-meter-label">0 of 3 friends joined</p>
           <button type="button" class="c-code" id="c-copy"><span id="c-code">––––––––</span><span class="c-copy-label" id="c-copy-label">Copy link</span></button>
-          <p class="c-hint">Every friend who joins with your link puts you ahead of everyone with fewer invites.</p>
+          <p class="c-hint">3 friends who join with your link = a guaranteed spot in the first wave of the beta. Every invite also moves you up the line.</p>
           <div class="c-btns">
             <a id="s-wa" target="_blank" rel="noopener">WhatsApp</a>
             <a id="s-x" target="_blank" rel="noopener">X</a>
@@ -353,6 +359,9 @@
     document.getElementById("s-tg").href = "https://t.me/share/url?url=" + encodeURIComponent(link) + "&text=" + encodeURIComponent(msg);
     document.getElementById("s-mail").href = "mailto:?subject=" + encodeURIComponent("Lowie") + "&body=" + encodeURIComponent(msg + "\n\n" + link);
     document.getElementById("s-sms").href = "sms:?&body=" + encodeURIComponent(msg + " " + link);
+    const n = Math.min(st.referrals || 0, 3);
+    for (let k = 1; k <= 3; k++) document.getElementById("m" + k).classList.toggle("on", k <= n);
+    document.getElementById("c-meter-label").textContent = n >= 3 ? "First wave: guaranteed" : n + " of 3 friends joined";
     const inv = st.invites || [];
     if (inv.length) {
       const fmt = d => new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric" });
