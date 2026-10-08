@@ -330,7 +330,10 @@
       headers: { "apikey": KEY, "Content-Type": "application/json" },
       body: JSON.stringify(body)
     });
-    if (!r.ok) throw new Error(r.status === 400 ? "invalid" : "network");
+    if (!r.ok) {
+      let msg = ""; try { msg = (await r.json()).message || ""; } catch {}
+      throw new Error(/too many/.test(msg) ? "limit" : r.status === 400 ? "invalid" : "network");
+    }
     return r.json();
   }
   const join = (email, building) => rpc("join_waitlist", { p_email: email, p_source: source, p_building: building || null, p_ref: refCode || null });
@@ -381,12 +384,16 @@
     btn.disabled = true; btn.textContent = "Joining…";
     try {
       const st = await join(email);
+      if (st && st.exists) {
+        status.className = "status"; status.textContent = "You're already on the list. We'll email you when your spot opens.";
+        btn.disabled = false; btn.textContent = "Join waitlist"; return;
+      }
       joined = email;
       celebrate();
       showCard(st);
     } catch (err) {
       status.className = "status err";
-      status.textContent = err.message === "invalid" ? "That email doesn't look right." : "Something went wrong. Try again in a minute.";
+      status.textContent = err.message === "invalid" ? "That email doesn't look right." : err.message === "limit" ? "Too many signups from this connection. Try again in an hour." : "Something went wrong. Try again in a minute.";
       btn.disabled = false; btn.textContent = "Join waitlist";
     }
   });
