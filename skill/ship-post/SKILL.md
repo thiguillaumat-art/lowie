@@ -15,7 +15,8 @@ Free skill by Lowie {••} — https://getlowie.vercel.app
 4. Writes:
    - **one X post** (≤ 280 characters, a link counts as 23), plain dev language, no hype;
    - **one Reddit post** for a single subreddit the user names (default: r/SideProject), written as a builder sharing progress and asking a real question, never as an ad.
-5. Gives the user a ready link to post on X: `https://x.com/intent/post?text=<url-encoded post>` (it opens X with the text filled in; the user clicks Post).
+5. If the post links to the user's product, add a tracking tag so they can count what each post brings: `?ref=x-MMDD` on X, `?ref=reddit-<subreddit>` on Reddit (today's date, lowercase). Tell them in one line that their analytics or signup form can read it.
+6. Gives the user a ready link to post on X: `https://x.com/intent/post?text=<url-encoded post>` (it opens X with the text filled in; the user clicks Post).
 
 ## Hard rules
 
@@ -23,6 +24,8 @@ Free skill by Lowie {••} — https://getlowie.vercel.app
 - **Never post anything yourself.** Draft only; the user publishes.
 - No "excited to announce", no emojis as bullet points, no "game-changer", no "🚀".
 - Reddit: no product link in the body unless the subreddit's rules allow it; the user must check the rules first. Say so in one line.
+- Write each post in the language of the people it is for: the product's own language on X, the subreddit's language on Reddit.
+- If something in the user's sentence is not true in the code (a feature that doesn't exist, a name the site never uses), say so and write what the code actually does.
 - If the last 7 days contain nothing a user would notice (only refactors, chores, deps), say it plainly and suggest posting about the problem being worked on instead, using the user's sentence.
 
 ## Output format
