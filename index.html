@@ -102,6 +102,12 @@
   .problem p { font-size: 19px; line-height: 30px; color: var(--muted); max-width: 600px; text-wrap: balance; }
   .problem .bridge { font-family: var(--mono); font-size: 15px; color: var(--ink); padding-top: 18px; }
   @media (max-width: 640px) { .problem { padding: 40px 16px 24px; } .problem h2 { font-size: 24px; line-height: 30px; } .problem p { font-size: 17px; line-height: 27px; } }
+  .free { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; padding: 24px 48px 72px; }
+  .free h2 { font-family: var(--pixel); font-weight: 400; font-size: 24px; line-height: 32px; text-wrap: balance; }
+  .free p { font-size: 17px; line-height: 27px; color: var(--muted); max-width: 560px; text-wrap: balance; }
+  .free code { font-family: var(--mono); font-size: 15px; color: var(--ink); white-space: nowrap; }
+  .free a { font-family: var(--mono); font-size: 15px; color: var(--ink); }
+  @media (max-width: 640px) { .free { padding: 16px 16px 48px; } .free h2 { font-size: 20px; line-height: 28px; } }
   .term-wrap { display: flex; justify-content: center; padding: 24px 48px 120px; }
   .term { width: 880px; max-width: 100%; background: var(--term); border: 1px solid #212121; border-radius: 9px; overflow: hidden; box-shadow: 0 24px 48px -16px rgba(0,0,0,.25); }
   .bar { position: relative; display: flex; gap: 8px; align-items: center; height: 40px; padding: 0 16px; border-bottom: 1px solid var(--term-line); }
@@ -253,6 +259,12 @@
       <div class="row"><b class="dim">$</b><span class="cursor" aria-hidden="true"></span></div>
     </div>
   </div>
+</section>
+
+<section class="free" aria-labelledby="free-title">
+  <h2 id="free-title">Try the part that already works</h2>
+  <p>A tiny piece of the real product, to get a taste. A free Claude Code skill: type <code>/ship-post</code> in your repo and it drafts one X post and one Reddit post from your commits. It never invents a number.</p>
+  <a href="https://github.com/thiguillaumat-art/lowie/tree/main/skill/ship-post" target="_blank" rel="noopener">Get it on GitHub →</a>
 </section>
 </main>
 
