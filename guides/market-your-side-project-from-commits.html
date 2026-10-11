@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to market a side project from your commits · Lowie</title>
+<meta name="description" content="A six-step method to turn your git commits into posts people read, tag every link, and count signups instead of likes. With real numbers from a project three days in.">
+<link rel="canonical" href="https://getlowie.vercel.app/guides/market-your-side-project-from-commits">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to market a side project from your commits (without becoming a marketer)">
+<meta property="og:description" content="A six-step method to turn your git commits into posts people read, tag every link, and count signups instead of likes. With real numbers from a project three days in.">
+<meta property="og:url" content="https://getlowie.vercel.app/guides/market-your-side-project-from-commits">
+<meta property="og:image" content="https://getlowie.vercel.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@getlowie">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="/fonts/fonts.css" rel="stylesheet">
+<style>
+  :root { --ink:#121212; --muted:#6B6B6B; --line:#EEEEEE; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:#fff; color:var(--ink); font-family:Inter, system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+  header { padding:24px 48px; border-bottom:1px solid var(--line); }
+  header a { font-family:Silkscreen, monospace; font-size:22px; line-height:1; color:var(--ink); text-decoration:none; letter-spacing:.02em; display:inline-flex; }
+  header .wm { display:flex; align-items:center; }
+  header svg { margin:0 3px; position:relative; top:2px; }
+  main { max-width:680px; padding:64px 24px 96px; margin:0 auto; display:flex; flex-direction:column; gap:20px; }
+  h1 { font-family:Silkscreen, monospace; font-weight:400; font-size:34px; line-height:40px; }
+  h2 { font-size:17px; font-weight:600; padding-top:12px; }
+  p, li { font-size:16px; line-height:26px; }
+  ul { padding-left:20px; display:flex; flex-direction:column; gap:6px; }
+  .meta { font-family:"IBM Plex Mono", monospace; font-size:13px; color:var(--muted); }
+  a { color:var(--ink); }
+  h2 { font-family:Inter, system-ui, sans-serif; font-size:21px; line-height:28px; font-weight:600; padding-top:20px; }
+  pre { background:#161616; color:#EDEDED; border-radius:10px; padding:16px 18px; overflow-x:auto; }
+  pre code, code { font-family:"IBM Plex Mono", monospace; font-size:14px; }
+  p code, li code { background:#F4F4F4; padding:1px 5px; border-radius:4px; }
+  .lede { font-size:19px; line-height:30px; }
+  .cta { border-top:1px solid var(--line); padding-top:24px; font-family:"IBM Plex Mono", monospace; font-size:14px; color:var(--muted); }
+  @media (max-width:640px) { header { padding:16px; } main { padding:40px 16px 64px; } h1 { font-size:26px; line-height:32px; } }
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to market a side project from your commits (without becoming a marketer)", "datePublished": "2026-10-11", "dateModified": "2026-10-11", "author": {"@type": "Organization", "name": "Lowie", "url": "https://getlowie.vercel.app"}, "mainEntityOfPage": "https://getlowie.vercel.app/guides/market-your-side-project-from-commits", "description": "A six-step method to turn your git commits into posts people read, tag every link, and count signups instead of likes. With real numbers from a project three days in."}</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header><a href="/" aria-label="Lowie"><span class="wm" aria-hidden="true">L<svg width="25" height="20" viewBox="0 0 20 16" shape-rendering="crispEdges" fill="#121212"><path d="M4 1h2v1H4zM3 2h2v4H3zM2 6h2v1H2zM1 7h2v2H1zM2 9h2v1H2zM3 10h2v4H3zM4 14h2v1H4zM14 1h2v1h-2zM15 2h2v4h-2zM16 6h2v1h-2zM17 7h2v2h-2zM16 9h2v1h-2zM15 10h2v4h-2zM14 14h2v1h-2zM7 6h2v3H7zM11 6h2v3h-2z"/></svg>WIE</span></a></header>
+<main>
+<h1>How to market a side project from your commits (without becoming a marketer)</h1>
+<p class="meta">October 11, 2026 · 5 min read</p>
+<p class="lede">You already write about your product every day. It's called a commit log.</p>
+<p>"Add CSV export." "Fix timezone bug on invoices." "Onboarding: skip step 2 if no team." Each line is something a user might care about, written by the person who knows the product best. Most of us just never turn it into anything anyone outside the repo will read.</p>
+<p>Here is the method I use, and what I've learned trying it on my own project, with the real numbers.</p>
+<h2>1. Pick the one change a user would notice</h2>
+<p>Open the last week of commits and ignore everything a user can't see: refactors, dependency bumps, CI, lint. If nothing is left, that's an answer too: don't post this week, or post about why you spent it on plumbing.</p>
+<p>From what's left, keep <strong>one</strong> change. Not five. A post about five things is a changelog, and nobody reads changelogs they didn't ask for.</p>
+<h2>2. Rewrite it as "what changed for the user", in one sentence</h2>
+<p>The commit says <em>what you did</em>. The post needs <em>what's different for them now</em>.</p>
+<ul>
+<li>Commit: <code>feat: add CSV export to invoices</code></li>
+<li>For the user: "You can now get your invoices into your accountant's spreadsheet in one click."</li>
+</ul>
+<p>If you can't write that sentence, the change probably isn't post-worthy. That's fine.</p>
+<h2>3. Never add a number you can't point to</h2>
+<p>This is the trap with AI-written posts. Ask any model to "write a tweet about what I shipped" and it will happily add "10x faster" or "users loved it". When I tested an early version of my own tool, it wrote "People kept dropping off…" about my project with zero data behind it.</p>
+<p>Rule: a number goes in only if it's in your commits, your diff, or your own answer. "Export now takes one click" is fine. "Export is 3x faster" needs a measurement.</p>
+<h2>4. Adapt it to the place, not just the length</h2>
+<ul>
+<li><strong>X</strong>: one short post, one idea. If you can, add an image or a short video: Resend's founders wrote that video performed best for their launch, then images, with plain text and links last (<a href="https://resend.com/blog/lessons-learned-from-growing-a-waitlist" target="_blank" rel="noopener">source</a>).</li>
+<li><strong>Reddit</strong>: read the subreddit rules first. Many subs restrict self-promotion; r/ClaudeAI, for example, sends project posts from accounts under 50 karma to a showcase megathread (per its moderators, April 2026). Show the thing, explain what you learned, ask a real question. Don't paste your X post.</li>
+<li><strong>Hacker News</strong>: only if there's a genuinely technical angle. A plain title, no hype.</li>
+</ul>
+<h2>5. Tag every link, and count signups, not likes</h2>
+<p>Give each post its own link: <code>yoursite.com/?ref=x-1009</code>, <code>?ref=reddit-sideproject</code>. Save the <code>ref</code> with each signup in your database. After 48 hours, the question isn't "how many likes?" but "how many signups came with this tag?"</p>
+<p>Here is why this matters. My own project, three days in (Oct 10, 2026): 4 followers on X, 22 visitors to the page, and 0 signups from any post. The followers felt like progress. None of them signed up. Without the tags I'd have counted the followers as a win.</p>
+<h2>6. Don't kill a post type after one try</h2>
+<p>One post flopping proves very little. It could be the hour, the day, the length, the first line, the image. Decide on a <strong>type</strong> of post (a progress update with numbers, a technical story, a question to your users) and only drop it after it fails a few times at different hours. When something works, try it again at another time to see if it was the content or the timing.</p>
+<h2>7. What I got wrong</h2>
+<ul>
+<li>I posted from a brand-new X account. With almost no followers, my posts got single-digit views, even with an image. <strong>Replies under bigger, fresh posts</strong> reach more people than your own posts at the start, and <strong>communities where posts are seen without followers</strong> (Reddit, some directories) matter more than your own feed.</li>
+<li>I treated "agreed!" under one of my replies as interest. It isn't. Interest is someone saying they have the problem.</li>
+</ul>
+<h2>The boring part, automated</h2>
+<p>Steps 1 to 4 are the same every week, so I turned them into a free Claude Code skill: it reads your recent commits and diff, asks you one question (what changed for the user), then drafts one X post and one Reddit post. Only numbers it can find, and it never posts for you.</p>
+<pre><code>/plugin marketplace add thiguillaumat-art/lowie
+/plugin install ship-post@lowie
+</code></pre>
+<p>Then type <code>/ship-post</code> in your repo. Source and plain-skill install: <a href="https://github.com/thiguillaumat-art/lowie/tree/main/skill/ship-post" target="_blank" rel="noopener">github.com/thiguillaumat-art/lowie</a> (MIT).</p>
+<p>Steps 5 and 6, the counting and the retesting, are what I'm building next: Lowie, a marketing hire for what you ship. It's a waitlist for now, with a public rule: 30 signups by Oct 22, or I shut it down. <a href="/?ref=guide-commits">getlowie.vercel.app</a></p>
+<p class="cta">Written by the person building <a href="/?ref=guide-commits">Lowie</a>, in public. Questions or corrections: <a href="mailto:hello.getlowie@gmail.com">hello.getlowie@gmail.com</a>.</p>
+</main>
+</body>
+</html>
