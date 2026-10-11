@@ -1,0 +1,14 @@
+{
+  "name": "ship-post",
+  "description": "Turn what you shipped (your recent git commits) into one honest X post and one Reddit post. Asks one question, never invents a number, never posts for you.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lowie",
+    "url": "https://getlowie.vercel.app"
+  },
+  "homepage": "https://github.com/thiguillaumat-art/lowie/tree/main/skill/ship-post",
+  "repository": "https://github.com/thiguillaumat-art/lowie",
+  "license": "MIT",
+  "keywords": ["marketing", "build-in-public", "git", "launch", "social"],
+  "skills": "./"
+}

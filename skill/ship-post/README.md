@@ -6,6 +6,15 @@ Made by [Lowie](https://getlowie.vercel.app), the AI marketing agent that reads 
 
 ## Install (10 seconds)
 
+As a Claude Code plugin:
+
+```
+/plugin marketplace add thiguillaumat-art/lowie
+/plugin install ship-post@lowie
+```
+
+Or as a plain skill, in one line:
+
 ```bash
 mkdir -p ~/.claude/skills/ship-post && curl -fsSL https://raw.githubusercontent.com/thiguillaumat-art/lowie/main/skill/ship-post/SKILL.md -o ~/.claude/skills/ship-post/SKILL.md
 ```
