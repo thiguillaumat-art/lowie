@@ -9,6 +9,16 @@
   "homepage": "https://github.com/thiguillaumat-art/lowie/tree/main/skill/ship-post",
   "repository": "https://github.com/thiguillaumat-art/lowie",
   "license": "MIT",
-  "keywords": ["marketing", "build-in-public", "git", "launch", "social"],
-  "skills": "./"
+  "keywords": [
+    "marketing",
+    "build-in-public",
+    "git",
+    "launch",
+    "social"
+  ],
+  "skills": "./",
+  "privacyPolicyUrl": "https://getlowie.vercel.app/privacy",
+  "termsOfServiceUrl": "https://getlowie.vercel.app/terms",
+  "supportUrl": "https://github.com/thiguillaumat-art/lowie/issues",
+  "documentationUrl": "https://github.com/thiguillaumat-art/lowie/blob/main/skill/ship-post/README.md"
 }
