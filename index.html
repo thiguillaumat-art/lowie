@@ -128,12 +128,6 @@
   .session.play .row.on { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
 
-  footer { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; border-top: 1px solid var(--line); font-family: var(--mono); font-size: 13px; color: var(--muted); }
-  .f-left { display: flex; align-items: center; gap: 14px; }
-  .f-mark { font-family: var(--pixel); color: var(--ink); font-size: 16px; }
-  .f-links { display: flex; gap: 28px; }
-  .f-links a { color: var(--ink); text-decoration: none; }
-  .f-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   @media (max-width: 1100px) { .ascii { display: none; } }
   @media (max-width: 640px) {
@@ -151,9 +145,32 @@
     .row > :nth-child(2):not(.cursor) { flex: 1 1 0; min-width: 0; }
     .row > :nth-child(3) { flex-basis: 100%; padding-left: 20px; }
     .row b { width: 12px; }
-    footer { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px 16px; }
-    .f-links { flex-wrap: wrap; gap: 16px 24px; }
   }
+
+  /* Footer: crisp lavender band that drifts and leans toward the pointer; giant l{··}wie wordmark, bottom-cropped */
+  .lf { position: relative; overflow: hidden; isolation: isolate; container-type: inline-size; border-top: 1px solid var(--line); background: var(--bg); color: var(--ink); font-family: var(--sans); --b: 58%; }
+  .lf a { color: inherit; text-decoration: none; }
+  .lf ul { list-style: none; margin: 0; padding: 0; }
+  .lf-band { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .75; background: linear-gradient(118deg, transparent calc(var(--b) - 5%), var(--lavender) calc(var(--b) - 5%), var(--lavender) calc(var(--b) + 5%), transparent calc(var(--b) + 5%)); }
+  .lf-in { position: relative; z-index: 2; max-width: 1120px; margin: 0 auto; padding: 72px 48px 0; display: grid; grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, .8fr)); gap: 40px; }
+  .lf-agent { display: flex; gap: 18px; align-items: flex-start; }
+  .lf-agent svg { flex-shrink: 0; }
+  .lf-txt { font-size: 14px; line-height: 22px; }
+  .lf-txt b { display: block; font-family: var(--pixel); font-weight: 400; font-size: 15px; margin-bottom: 6px; }
+  .lf-count { font-family: var(--mono); font-size: 12.5px; margin-top: 12px; display: flex; align-items: center; gap: 8px; }
+  .lf-dot { display: inline-block; width: 7px; height: 7px; background: currentColor; animation: lf-blink 1.6s steps(1) infinite; }
+  @keyframes lf-blink { 50% { opacity: 0; } }
+  .lf-label { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-bottom: 12px; margin: 0 0 10px; border-bottom: 1px solid #9a9a9a; }
+  .lf-links a { display: inline-block; padding: 5px 0; font-size: 14.5px; transition: transform .3s cubic-bezier(.2,.8,.2,1), color .2s; }
+  .lf-links a:hover { transform: translateX(6px); color: #5b46c9; }
+  .lf-copy { font-size: 14.5px; color: var(--muted); }
+  .lf-word { position: relative; z-index: 1; overflow: hidden; margin-top: 56px; height: 17.5cqw; }
+  .lf-word-in { font-family: var(--sans); font-weight: 600; font-size: 24cqw; line-height: 1; letter-spacing: -.065em; white-space: nowrap; text-align: center; transform: translateY(-14%); user-select: none; color: transparent; -webkit-background-clip: text; background-clip: text; background-image: linear-gradient(118deg, var(--ink) calc(var(--b) - 5%), #5b46c9 calc(var(--b) - 5%), #5b46c9 calc(var(--b) + 5%), var(--ink) calc(var(--b) + 5%)); }
+  .lf-wb { font-weight: 500; } .lf-wb1 { margin-left: .07em; margin-right: -.03em; } .lf-wb2 { margin-left: -.03em; margin-right: .03em; }
+  .lf-we { letter-spacing: -.04em; margin: 0 -.01em; font-weight: 800; }
+  @container (max-width: 760px) { .lf-in { grid-template-columns: 1fr 1fr; } .lf-in > :first-child { grid-column: 1 / -1; } }
+  @media (max-width: 640px) { .lf-in { padding: 48px 16px 0; gap: 32px 24px; } .lf-word { margin-top: 40px; } }
+  @media (prefers-reduced-motion: reduce) { .lf-dot { animation: none; } .lf-links a { transition: none; } }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -268,14 +285,19 @@
 </section>
 </main>
 
-<footer>
-  <div class="f-left"><span class="f-mark" aria-hidden="true">{••}</span><span>© 2026 Lowie</span></div>
-  <nav class="f-links" aria-label="Footer">
-    <a href="https://x.com/getlowie" target="_blank" rel="noopener">X</a>
-    <a href="/guides/market-your-side-project-from-commits">Guide</a>
-    <a href="/privacy">Privacy policy</a>
-    <a href="/terms">Terms of service</a>
-  </nav>
+<footer class="lf">
+  <div class="lf-band" aria-hidden="true"></div>
+  <div class="lf-in">
+    <div class="lf-agent">
+      <svg id="lf-face" width="80" height="64" viewBox="0 0 20 16" shape-rendering="crispEdges" aria-hidden="true"></svg>
+      <div class="lf-txt"><b>Lowie</b>A marketing hire for what you ship. Built in public, one commit at a time.
+        <p class="lf-count"><i class="lf-dot" aria-hidden="true"></i><span><span id="lf-n">–</span> / 30 builders</span></p></div>
+    </div>
+    <nav aria-label="Product"><p class="lf-label">Product</p><ul class="lf-links"><li><a href="#join">Join the beta</a></li><li><a href="https://github.com/thiguillaumat-art/lowie/tree/main/skill/ship-post" target="_blank" rel="noopener">Free skill</a></li><li><a href="/guides/market-your-side-project-from-commits">Guide</a></li></ul></nav>
+    <nav aria-label="Follow"><p class="lf-label">Follow</p><ul class="lf-links"><li><a href="https://x.com/getlowie" target="_blank" rel="noopener">X</a></li><li><a href="https://github.com/thiguillaumat-art/lowie" target="_blank" rel="noopener">GitHub</a></li><li><a href="mailto:hello.getlowie@gmail.com">Email</a></li></ul></nav>
+    <nav aria-label="Legal"><p class="lf-label">Legal</p><ul class="lf-links"><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><span class="lf-copy">© 2026 Lowie</span></li></ul></nav>
+  </div>
+  <div class="lf-word" aria-hidden="true"><div class="lf-word-in">l<span class="lf-wb lf-wb1">{</span><span class="lf-we">··</span><span class="lf-wb lf-wb2">}</span>wie</div></div>
 </footer>
 
 <script>
@@ -457,6 +479,34 @@
     try { await join(joined, text); e.target.style.display = "none"; status.className = "status"; status.textContent = "Thanks. That helps us build the right thing."; }
     catch { btn.disabled = false; status.className = "status err"; status.textContent = "Couldn't send that. Try again."; }
   });
+</script>
+<script>
+(() => {
+  const root = document.querySelector(".lf"); if (!root) return;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // the agent: same grid as the logo, eyes follow the pointer, blinks
+  const LB = [[4,1,2,1],[3,2,2,4],[2,6,2,1],[1,7,2,2],[2,9,2,1],[3,10,2,4],[4,14,2,1]];
+  const rc = (x,y,w,h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#121212"/>`;
+  const svg = document.getElementById("lf-face"); let dx = 0;
+  const draw = (blink) => svg.innerHTML = LB.map(([x,y,w,h]) => rc(x,y,w,h)).join("") + LB.map(([x,y,w,h]) => rc(20-x-w,y,w,h)).join("") + (blink ? rc(7+dx,8,2,1)+rc(11+dx,8,2,1) : rc(7+dx,6,2,3)+rc(11+dx,6,2,3));
+  draw(false);
+  addEventListener("pointermove", e => { const n = Math.max(-1, Math.min(1, Math.round((e.clientX / innerWidth - .5) * 2))); if (n !== dx) { dx = n; draw(false); } }, { passive: true });
+  if (!still) setInterval(() => { draw(true); setTimeout(() => draw(false), 140); }, 4200);
+  // live count (same public function as the hero counter)
+  fetch(SUPABASE_URL + "/rest/v1/rpc/waitlist_count", { method: "POST", headers: { apikey: KEY, "Content-Type": "application/json" }, body: "{}" })
+    .then(r => r.json()).then(n => { if (Number.isFinite(n)) document.getElementById("lf-n").textContent = n; }).catch(() => {});
+  // the band: slow drift, leans toward the pointer, runs only while visible
+  if (still) return;
+  let b = 58, u = .5, inside = false, last = performance.now(), raf = 0, on = false;
+  root.addEventListener("pointermove", e => { const r = root.getBoundingClientRect(); u = (e.clientX - r.left) / r.width; inside = true; });
+  root.addEventListener("pointerleave", () => inside = false);
+  const tick = now => { const dt = Math.min(.1, (now - last) / 1000); last = now; const t = now / 1000;
+    const idle = 58 + 9 * (.7 * Math.sin(t * .21) + .3 * Math.sin(t * .077 + 1.3));
+    const target = inside ? (30 + 52 * u) * .75 + idle * .25 : idle;
+    b = target + (b - target) * Math.pow(1 - .035, dt * 60);
+    root.style.setProperty("--b", b.toFixed(2) + "%"); raf = requestAnimationFrame(tick); };
+  new IntersectionObserver(([e]) => { if (e.isIntersecting && !on) { on = true; last = performance.now(); raf = requestAnimationFrame(tick); } else if (!e.isIntersecting && on) { on = false; cancelAnimationFrame(raf); } }).observe(root);
+})();
 </script>
 </body>
 </html>
